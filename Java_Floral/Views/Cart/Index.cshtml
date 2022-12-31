@@ -1,0 +1,152 @@
+﻿@model CartVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<!-- Breadcrumb Area Start Here -->
+<div class="breadcrumbs-area position-relative">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="breadcrumb-content position-relative section-content">
+                    <h3 class="title-3">Shopping Cart</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li>Shopping Cart</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Area End Here -->
+<!-- cart main wrapper start -->
+<div class="cart-main-wrapper mt-no-text">
+    <div class="container custom-area">
+        <div class="row">
+            <div class="col-lg-12 col-custom">
+                <!-- Cart Table Area -->
+                <div class="cart-table table-responsive">
+
+                    @if (Model.CartItems.Count > 0)
+                    {
+
+
+                        <table class="table table-bordered ">
+                            <thead>
+                                <tr>
+                                    <th class="pro-thumbnail">
+                                        Image
+                                    </th>
+                                    <th class="pro-title">
+                                        Product
+                                    </th>
+                                    @*<th class="pro-quantity">
+                                        Quantity
+                                        </th>*@
+                                    <th class="pro-quantity">
+                                        action
+                                    </th>
+                                    <th class="pro-price">
+                                        Price
+                                    </th>
+                                    <th class="pro-subtotal">
+                                        Total
+                                    </th>
+                                    <th>Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.CartItems)
+                                {
+                                    <tr>
+                                        <td class="pro-thumbnail">
+                                            <img class="img-fluid" src="~/@item.Image" alt="Product" />
+                                        </td>
+                                        <td class="pro-title">
+                                            @Html.DisplayFor(modelItem => item.ProductName)
+                                        </td>
+                                        @*  <td class="pro-quantity">
+                                            @Html.DisplayFor(modelItem => item.Quantity)
+                                            </td>*@
+                                        <td class="pro-quantity">
+                                            <div class="quantity">
+
+                                                <a asp-action="Decrease" asp-route-id="@item.ProductId" class="dec qtybutton"><i class="fa fa-minus"></i></a>
+                                                <a class="cart-plus-minus-box">    @Html.DisplayFor(modelItem => item.Quantity)</a>
+                                                <a asp-action="AddToCart" asp-route-id="@item.ProductId" class="inc qtybutton"><i class="fa fa-plus"></i></a>
+
+                                            </div>
+                                        </td>
+                                        <td class="pro-price">
+                                            @item.price.ToString("C2")
+                                        </td>
+                                        <td class="pro-subtotal">
+                                            @*_______________ Single Product Price after Quntity_______________*@
+                                            @Model.CartItems.Where(x => x.ProductId == item.ProductId).Sum(x => x.Quantity * x.price).ToString("C2")
+                                        </td>
+                                        <td class="pro-remove"><a asp-action="Remove" asp-route-id="@item.ProductId"><i class="lnr lnr-trash"></i></a></td>
+
+                                    </tr>
+                                }
+                                <tr>
+                                    <td class="text-right" colspan="6">Grand Total : <b> @Model.GrandTotal.ToString("C2")</b></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a asp-area="" asp-action="Index" asp-controller="Home" class="btn flosun-button primary-btn rounded-0 black-btn w-100">Back</a>
+                                    </td>
+                                    <td class="text-right" colspan="4">
+                                        <a class="btn flosun-button primary-btn rounded-0 black-btn w-100" asp-action="ClearCart">Clear All</a>
+                                    </td>
+                                    <td class="text-right">
+                                        <a class="btn flosun-button primary-btn rounded-0 black-btn w-100">Checkout</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                    }
+                    else
+                    {
+                        <h3 class="display-4 text-center mt-5">Your Cart is Empty</h3>
+                    }
+
+                </div>
+            </div>
+        </div>
+          <div class="row">
+            <div class="col-lg-5 ml-auto col-custom">
+                <!-- Cart Calculation Area -->
+                <div class="cart-calculator-wrapper">
+                    <div class="cart-calculate-items">
+                        <h3>Cart Totals</h3>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr>
+                                    <td>Sub Total</td>
+
+                                    <td class="text-right" colspan="6">  @Model.GrandTotal.ToString("C2")</td>
+                                </tr>@*
+                                <tr>
+                                    <td>Shipping</td>
+                                    <td>$70</td>
+                                </tr>
+                                <tr class="total">
+                                    <td>Total</td>
+                                    <td class="total-amount">$300</td>
+                                </tr>*@
+                            </table>
+                        </div>
+                    </div>
+                    <a asp-action="OrderCheckOut" asp-controller="Orders" class="btn flosun-button primary-btn rounded-0 black-btn w-100">Proceed To Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

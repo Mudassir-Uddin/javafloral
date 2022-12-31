@@ -1,0 +1,19 @@
+﻿@model SmallCartVM
+
+@if (Model != null)
+{
+    <span class="badge badge-primary">@Model.NumberOfItems</span>
+
+    @*<p>(<span class="badge badge-primary">@Model.NumberOfItems</span>)</p>*@
+
+    @*<p>Total : <b>@Model.TotalAmount.ToString("C2")</b></p>
+    <a class="btn btn-primary mb-2" asp-controller="Cart" asp-action="Index">View Cart</a>
+    <br />
+
+    <a class="btn btn-danger" asp-controller="Cart" asp-action="ClearCart">Clear All</a>*@
+}
+else
+{
+    @*<p class="lead m-0">Empty_Cart</p>*@
+    <span class="badge badge-primary">0</span>
+}

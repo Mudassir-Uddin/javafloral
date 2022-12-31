@@ -1,0 +1,653 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Java_Floral</title>
+    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />*@
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/assets/images/favicon.ico">
+
+    <!-- CSS
+    ============================================ -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/assets/css/vendor/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="~/assets/css/vendor/font.awesome.min.css">
+    <!-- Linear Icons CSS -->
+    <link rel="stylesheet" href="~/assets/css/vendor/linearicons.min.css">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="~/assets/css/plugins/swiper-bundle.min.css">
+    <!-- Animation CSS -->
+    <link rel="stylesheet" href="~/assets/css/plugins/animate.min.css">
+    <!-- Jquery ui CSS -->
+    <link rel="stylesheet" href="~/assets/css/plugins/jquery-ui.min.css">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="~/assets/css/plugins/nice-select.min.css">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="~/assets/css/plugins/magnific-popup.css">
+
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="~/assets/css/style.css">
+
+    <link rel="stylesheet" href="~/assets">
+</head>
+<body>
+
+    <!-- Header Area Start Here -->
+    <header class="main-header-area">
+        <!-- Main Header Area Start -->
+        <div class="main-header header-transparent header-sticky">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-lg-2 col-xl-2 col-md-6 col-6 col-custom">
+                        <div class="header-logo d-flex align-items-center">
+                            <a href="index.html">
+                                <img class="img-full" src="~/assets/images/logo/logo4.png" alt="Header Logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 d-none d-lg-flex justify-content-center col-custom">
+                        <nav class="main-nav d-none d-lg-flex">
+                            <ul class="nav">
+                                <li>
+                                    <a class="@(ViewContext.RouteData.Values["Action"].ToString()=="Index" && ViewContext.RouteData.Values["Controller"].ToString()=="Home" ?"active":"")" asp-area="" asp-controller="Home" asp-action="index">
+                                        <span class="menu-text"> Home</span>
+
+                                    </a>
+                                    @* <ul class="dropdown-submenu dropdown-hover">
+                                        <li><a class="active" href="index.html">Home Page - 1</a></li>
+                                        <li><a href="index-2.html">Home Page - 2</a></li>
+                                        <li><a href="index-3.html">Home Page - 3</a></li>
+                                        </ul>*@
+                                </li>
+                                <li>
+                                    @{
+                                        var crentAction = ViewContext.RouteData.Values["Action"].ToString();
+                                        var crentController = ViewContext.RouteData.Values["Controller"].ToString();
+                                        var activeif = "";
+                                        if (crentAction == "Index" && crentController == "Occasions")
+                                        {
+                                            activeif = "active";
+                                        }
+                                    }
+                                    <a href="shop.html" class="@(activeif)">
+                                        <span class="menu-text">Occasions</span>
+                                        <i class="fa fa-angle-down"></i>
+                                    </a>
+                                    <div class="mega-menu dropdown-hover">
+                                        <div class="menu-colum">
+                                            <ul>
+                                                @*<li><span class="mega-menu-text">Shop</span></li>*@
+                                                <li><a asp-area="" asp-controller="Occasions" asp-action="index" asp-route-value="">All Products</a></li>
+                                                <li><a asp-area="" asp-controller="Occasions" asp-action="index" asp-route-value="Mothers Day">Mother's Day</a></li>
+                                                <li><a asp-area="" asp-controller="Occasions" asp-action="index" asp-route-value="Fathers Day">Father's Day</a></li>
+                                                <li><a asp-area="" asp-controller="Occasions" asp-action="index" asp-route-value="Anniversary">Anniversary</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="menu-colum">
+                                            <ul>
+                                                @*<li><span class="mega-menu-text">Product</span></li>*@
+                                                <li><a asp-area="" asp-controller="Occasions" asp-action="index" asp-route-value="Sympaty">Sympaty</a></li>
+                                                <li><a asp-area="" asp-controller="Occasions" asp-action="index" asp-route-value="Get Will Soon">Get Will Soon</a></li>
+                                                <li><a asp-area="" asp-controller="Occasions" asp-action="index" asp-route-value="Thank You">Thank You</a></li>
+                                                <li><a asp-area="" asp-controller="Occasions" asp-action="index" asp-route-value="Baby is here">Baby is here</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="menu-colum">
+                                            <ul>
+                                                @*<li><span class="mega-menu-text">Others</span></li>*@
+                                                <li><a asp-area="" asp-controller="Occasions" asp-action="index" asp-route-value="Combo">Valentines Day</a></li>
+                                                <li><a asp-area="" asp-controller="Occasions" asp-action="index" asp-route-value="Babys Breath">Baby's Breath</a></li>
+                                                <li><a asp-area="" asp-controller="Occasions" asp-action="index" asp-route-value="wedding">Wedding</a></li>
+                                                <li><a asp-area="" asp-controller="Occasions" asp-action="index" asp-route-value="Love & Romance">Love & Romance</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a class="@(ViewContext.RouteData.Values["Action"].ToString()=="Combo" && ViewContext.RouteData.Values["Controller"].ToString()=="Home" ?"active":"")" asp-area="" asp-controller="Home" asp-action="Combo" asp-route-value="Combo">
+                                        <span class="menu-text"> Combo</span>
+
+                                    </a>
+                                </li>
+
+                                @*<li>
+                                    <a href="#">
+                                    <span class="menu-text">Pages</span>
+                                    <i class="fa fa-angle-down"></i>
+                                    </a>
+                                    <ul class="dropdown-submenu dropdown-hover">
+                                    <li><a asp-controller="Home" asp-action="ContactUs">Contact</a></li>
+                                    <li><a asp-controller="Accounts" asp-action="myaccount">My Account</a></li>
+                                    <li><a href="frequently-questions.html">FAQ</a></li>
+                                    <li><a href="login.html">Login</a></li>
+                                    <li><a href="register.html">Register</a></li>
+                                    </ul>
+                                    </li>*@
+                                <li>
+                                    <a class="@(ViewContext.RouteData.Values["Action"].ToString()=="AboutUs" && ViewContext.RouteData.Values["Controller"].ToString()=="Occasions" ?"Home":"")" asp-area="" asp-controller="Home" asp-action="AboutUs">
+                                        <span class="menu-text"> About Us</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="@(ViewContext.RouteData.Values["Action"].ToString()=="ContactUs" && ViewContext.RouteData.Values["Controller"].ToString()=="Home" ?"active":"")" asp-area="" asp-controller="Home" asp-action="ContactUs">
+                                        <span class="menu-text">Contact Us</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-6 col-custom">
+                        <div class="header-right-area main-nav">
+                            <ul class="nav">
+                                <li class="minicart-wrap">
+                                    <a asp-area="" asp-action="Index" asp-controller="Cart" class="minicart-btn toolbar-btn">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        <span class="cart-item_count">@await Component.InvokeAsync("SmallCart")</span>
+                                    </a>
+
+
+                                </li>
+
+
+                                <li>
+                                    <a href="shop.html" class="pe-4">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                    </a>
+                                    <div class="sign-mega-menu dropdown-hover ps-3" style="background-color:white">
+                                        <ul>
+                                            @if (SignInManager.IsSignedIn(User))
+                                            {
+                                                <li><a asp-area="Security" asp-action="logout" asp-controller="Accounts" class="nav-link">LogOut</a></li>
+                                                <li class="nav-item"><a class="nav-link text-dark">@User.Identity.Name</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a class="nav-link text-dark" asp-area="Security" asp-action="Signup" asp-controller="Accounts">Register</a></li>
+                                                <li><a class="nav-link text-dark" asp-area="Security" asp-action="Signin" asp-controller="Accounts">Login</a></li>
+                                            }
+                                        </ul>
+
+                                    </div>
+                                </li>
+
+
+                                <li class="account-menu-wrap d-none d-lg-flex">
+                                    <a href="#" class="off-canvas-menu-btn">
+                                        <i class="fa fa-bars"></i>
+                                    </a>
+                                </li>
+                                <li class="mobile-menu-btn d-lg-none">
+                                    <a class="off-canvas-btn" href="#">
+                                        <i class="fa fa-bars"></i>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            @{
+                                //if (SignInManager.IsSignedIn(User))
+                                //{
+                                //    <ul type="none" class="navbar-nav flex-grow-1 justify-content-end align-content-end ">
+                                //        <li><a  asp-action="logout" asp-controller="Account" class="nav-link">LogOut</a></li>
+                                //        <li class="nav-item"><a class="nav-link text-dark">@User.Identity.Name</a></li>
+                                //    </ul>
+                                //}
+                                //else
+                                //{
+                                //    <ul type="none" class="navbar-nav flex-grow-1 justify-content-end align-content-end ">
+                                //        <li><a class="nav-link text-dark" asp-action="Signup" asp-controller="Account">Register</a></li>
+                                //        <li><a class="nav-link text-dark" asp-action="Signin" asp-controller="Account">Login</a></li>
+                                //    </ul>
+                                //}
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Header Area End -->
+        <!-- off-canvas menu start -->
+        <aside class="off-canvas-wrapper" id="mobileMenu">
+            <div class="off-canvas-overlay"></div>
+            <div class="off-canvas-inner-content">
+
+                <div class="btn-close-off-canvas">
+                    <i class="fa fa-times"></i>
+                </div>
+
+                <div class="off-canvas-inner">
+                    @*<div class="search-box-offcanvas">
+                        <form>
+                        <input type="text" placeholder="Search product...">
+                        <button class="search-btn"><i class="fa fa-search"></i></button>
+                        </form>
+                        </div>*@
+                    <!-- mobile menu start -->
+                    <div class="mobile-navigation">
+                        <!-- mobile menu navigation start -->
+                        <nav>
+                            <ul class="mobile-menu">
+                                <li class="menu-item-has-children">
+                                    <a asp-controller="Home" asp-action="index">Home</a>
+                                    @*<ul class="dropdown">
+                                        <li><a href="index.html">Home Page 1</a></li>
+                                        <li><a href="index-2.html">Home Page 2</a></li>
+                                        <li><a href="index-3.html">Home Page 3</a></li>
+                                        <li><a href="index-4.html">Home Page 4</a></li>
+                                        </ul>*@
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a href="#">Occasions</a>
+                                    <ul class="megamenu dropdown">
+                                        <li class="mega-title has-children">
+                                            <a href="#">Category 01</a>
+                                            <ul class="dropdown">
+                                                @*<li><span class="mega-menu-text">Shop</span></li>*@
+                                                <li><a asp-controller="Occasions" asp-action="index" asp-route-value="">All Products</a></li>
+                                                <li><a asp-controller="Occasions" asp-action="index" asp-route-value="Mothers Day">Mother's Day</a></li>
+                                                <li><a asp-controller="Occasions" asp-action="index" asp-route-value="Fathers Day">Father's Day</a></li>
+                                                <li><a asp-controller="Occasions" asp-action="index" asp-route-value="Anniversary">Anniversary</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="mega-title has-children">
+                                            <a href="#">Category 02</a>
+                                            <ul class="dropdown">
+                                                @*<li><span class="mega-menu-text">Product</span></li>*@
+                                                <li><a asp-controller="Occasions" asp-action="index" asp-route-value="Sympaty">Sympaty</a></li>
+                                                <li><a asp-controller="Occasions" asp-action="index" asp-route-value="Get Will Soon">Get Will Soon</a></li>
+                                                <li><a asp-controller="Occasions" asp-action="index" asp-route-value="Thank You">Thank You</a></li>
+                                                <li><a asp-controller="Occasions" asp-action="index" asp-route-value="Baby is here">Baby is here</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="mega-title has-children">
+                                            <a href="#">Category 03</a>
+                                            <ul class="dropdown">
+                                                @*<li><span class="mega-menu-text">Others</span></li>*@
+                                                <li><a asp-controller="Occasions" asp-action="index" asp-route-value="Combo">Valentines Day</a></li>
+                                                <li><a asp-controller="Occasions" asp-action="index" asp-route-value="Babys Breath">Baby's Breath</a></li>
+                                                <li><a asp-controller="Occasions" asp-action="index" asp-route-value="wedding">Wedding</a></li>
+                                                <li><a asp-controller="Occasions" asp-action="index" asp-route-value="Love & Romance">Love & Romance</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a asp-controller="Occasions" asp-action="Combo">Combo</a>
+
+                                </li>
+                                @*<li class="menu-item-has-children ">
+                                    <a href="#">Pages</a>
+                                    <ul class="dropdown">
+                                    <li><a href="frequently-questions.html">FAQ</a></li>
+                                    <li><a href="my-account.html">My Account</a></li>
+                                    <li><a href="login-register.html">login &amp; register</a></li>
+                                    </ul>
+                                    </li>*@
+                                <li><a asp-controller="Home" asp-action="AboutUs">About Us</a></li>
+                                <li><a asp-controller="Home" asp-action="ContactUs">Contact</a></li>
+                            </ul>
+                        </nav>
+                        <!-- mobile menu navigation end -->
+                    </div>
+                    <!-- mobile menu end -->
+                    <div class="offcanvas-widget-area">
+                        <div class="switcher">
+                            <div class="language">
+                                <span class="switcher-title">Language: </span>
+                                <div class="switcher-menu">
+                                    <ul>
+                                        <li>
+                                            <a href="#">English</a>
+                                            <ul class="switcher-dropdown">
+                                                <li><a href="#">German</a></li>
+                                                <li><a href="#">French</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="currency">
+                                <span class="switcher-title">Currency: </span>
+                                <div class="switcher-menu">
+                                    <ul>
+                                        <li>
+                                            <a href="#">$ USD</a>
+                                            <ul class="switcher-dropdown">
+                                                <li><a href="#">€ EUR</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="top-info-wrap text-left text-black">
+                            <ul class="address-info">
+                                <li>
+                                    <i class="fa fa-phone"></i>
+                                    <a href="info%40yourdomain.html">(1245) 2456 012</a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-envelope"></i>
+                                    <a href="info%40yourdomain.html">info@yourdomain.com</a>
+                                </li>
+                            </ul>
+                            <div class="widget-social">
+                                <a class="facebook-color-bg" title="Facebook-f" href="#"><i class="fa fa-facebook-f"></i></a>
+                                <a class="twitter-color-bg" title="Twitter" href="#"><i class="fa fa-twitter"></i></a>
+                                <a class="linkedin-color-bg" title="Linkedin" href="#"><i class="fa fa-linkedin"></i></a>
+                                <a class="youtube-color-bg" title="Youtube" href="#"><i class="fa fa-youtube"></i></a>
+                                <a class="vimeo-color-bg" title="Vimeo" href="#"><i class="fa fa-vimeo"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <!-- off-canvas menu end -->
+        <!-- off-canvas menu start -->
+        <aside class="off-canvas-menu-wrapper" id="sideMenu">
+            <div class="off-canvas-overlay"></div>
+            <div class="off-canvas-inner-content">
+                <div class="off-canvas-inner">
+                    <div class="btn-close-off-canvas">
+                        <i class="fa fa-times"></i>
+                    </div>
+                    <!-- offcanvas widget area start -->
+                    <div class="offcanvas-widget-area">
+                        <ul class="menu-top-menu">
+                            <li><a href="about-us.html">About Us</a></li>
+                        </ul>
+                        <p class="desc-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <div class="switcher">
+                            <div class="language">
+                                <span class="switcher-title">Language: </span>
+                                <div class="switcher-menu">
+                                    <ul>
+                                        <li>
+                                            <a href="#">English</a>
+                                            <ul class="switcher-dropdown">
+                                                <li><a href="#">German</a></li>
+                                                <li><a href="#">French</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="currency">
+                                <span class="switcher-title">Currency: </span>
+                                <div class="switcher-menu">
+                                    <ul>
+                                        <li>
+                                            <a href="#">$ USD</a>
+                                            <ul class="switcher-dropdown">
+                                                <li><a href="#">€ EUR</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="top-info-wrap text-left text-black">
+                            <ul class="address-info">
+                                <li>
+                                    <i class="fa fa-phone"></i>
+                                    <a href="info%40yourdomain.html">(1245) 2456 012</a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-envelope"></i>
+                                    <a href="info%40yourdomain.html">info@yourdomain.com</a>
+                                </li>
+                            </ul>
+                            <div class="widget-social">
+                                <a class="facebook-color-bg" title="Facebook-f" href="#"><i class="fa fa-facebook-f"></i></a>
+                                <a class="twitter-color-bg" title="Twitter" href="#"><i class="fa fa-twitter"></i></a>
+                                <a class="linkedin-color-bg" title="Linkedin" href="#"><i class="fa fa-linkedin"></i></a>
+                                <a class="youtube-color-bg" title="Youtube" href="#"><i class="fa fa-youtube"></i></a>
+                                <a class="vimeo-color-bg" title="Vimeo" href="#"><i class="fa fa-vimeo"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- offcanvas widget area end -->
+                </div>
+            </div>
+        </aside>
+        <!-- off-canvas menu end -->
+    </header>
+    <!-- Header Area End Here -->
+
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+
+
+    <!--Footer Area Start-->
+    <footer class="footer-area">
+        <div class="footer-widget-area">
+            <div class="container container-default custom-area">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-custom">
+                        <div class="single-footer-widget m-0">
+                            <div class="footer-logo">
+                                <a asp-action="index" asp-controller="Home" asp-area="">
+                                    <img src="~/assets/images/logo/logo4" alt="Logo Image">
+                                </a>
+                            </div>
+                            <p class="desc-content">Lorem Khaled Ipsum is a major key to success. To be successful you’ve got to work hard you’ve got to make it.</p>
+                            <div class="social-links">
+                                <ul class="d-flex">
+                                    <li>
+                                        <a class="rounded-circle" href="#" title="Facebook">
+                                            <i class="fa fa-facebook-f"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rounded-circle" href="#" title="Twitter">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rounded-circle" href="#" title="Linkedin">
+                                            <i class="fa fa-linkedin"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rounded-circle" href="#" title="Youtube">
+                                            <i class="fa fa-youtube"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="rounded-circle" href="#" title="Vimeo">
+                                            <i class="fa fa-vimeo"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-2 col-custom">
+                        <div class="single-footer-widget">
+                            <h2 class="widget-title">Information</h2>
+                            <ul class="widget-list">
+                                <li><a asp-action="index" asp-controller="Home" asp-area="">Our Company</a></li>
+                                <li><a asp-action="ContactUs" asp-controller="Home" asp-area="">Contact Us</a></li>
+                                <li><a>Our Services</a></li>
+                                <li><a>Why We?</a></li>
+                                <li><a asp-action="AboutUs" asp-controller="Home" asp-area="">Careers</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-2 col-custom">
+                        <div class="single-footer-widget">
+                            <h2 class="widget-title">Quicklink</h2>
+                            <ul class="widget-list">
+                                <li><a asp-action="AboutUs" asp-controller="Home" asp-area="">About</a></li>
+                                <li><a asp-action="AboutUs" asp-controller="Home" asp-area="">Products</a></li>
+                                <li><a asp-action="Index" asp-controller="Home" asp-area="">Shop</a></li>
+                                <li><a asp-action="Index" asp-controller="Cart" asp-area="">Cart</a></li>
+                                <li><a asp-action="ContactUs" asp-controller="Home" asp-area="">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-2 col-custom">
+                        <div class="single-footer-widget">
+                            <h2 class="widget-title">Support</h2>
+                            <ul class="widget-list">
+                                <li><a asp-action="ContactUs" asp-controller="Home" asp-area="">Online Support</a></li>
+                                <li><a asp-action="ContactUs" asp-controller="Home" asp-area="">Shipping Policy</a></li>
+                                <li><a asp-action="ContactUs" asp-controller="Home" asp-area="">Return Policy</a></li>
+                                <li><a asp-action="ContactUs" asp-controller="Home" asp-area="">Privacy Policy</a></li>
+                                <li><a asp-action="ContactUs" asp-controller="Home" asp-area="">Terms of Service</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-custom">
+                        <div class="single-footer-widget">
+                            <h2 class="widget-title">See Information</h2>
+                            <div class="widget-body">
+                                <address>123, ABC, Road ##, Main City, Your address goes here.<br>Phone: 01234 567 890<br>Email: https://example.com</address>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright-area">
+            <div class="container custom-area">
+                <div class="row">
+                    <div class="col-12 text-center col-custom">
+                        <div class="copyright-content">
+                            <p>Copyright © 2021 <a href="https://hasthemes.com/" title="https://hasthemes.com/">HasThemes</a> | Built with&nbsp;<strong>FloSun</strong>&nbsp;by <a href="https://hasthemes.com/" title="https://hasthemes.com/">HasThemes</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--Footer Area End-->
+    <!-- Modal -->
+    <div class="modal flosun-modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="close close-button" data-bs-dismiss="modal" aria-label="Close">
+                    <span class="close-icon" aria-hidden="true">x</span>
+                </button>
+                <div class="modal-body">
+                    <div class="container-fluid custom-area">
+                        <div class="row">
+                            <div class="col-md-6 col-custom">
+                                <div class="modal-product-img">
+                                    <a class="w-100" href="#">
+                                        <img class="w-100" src="~/assets/images/product/large-size/1.jpg" alt="Product">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-custom">
+                                <div class="modal-product">
+                                    <div class="product-content">
+                                        <div class="product-title">
+                                            <h4 class="title">Product dummy name</h4>
+                                        </div>
+                                        <div class="price-box">
+                                            <span class="regular-price ">$80.00</span>
+                                            <span class="old-price"><del>$90.00</del></span>
+                                        </div>
+                                        <div class="product-rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-o"></i>
+                                            <i class="fa fa-star-o"></i>
+                                            <span>1 Review</span>
+                                        </div>
+                                        <p class="desc-content">we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame bel...</p>
+                                        <form class="d-flex flex-column w-100" action="#">
+                                            <div class="form-group">
+                                                <select class="form-control nice-select w-100">
+                                                    <option>S</option>
+                                                    <option>M</option>
+                                                    <option>L</option>
+                                                    <option>XL</option>
+                                                    <option>XXL</option>
+                                                </select>
+                                            </div>
+                                        </form>
+                                        <div class="quantity-with-btn">
+                                            <div class="quantity">
+                                                <div class="cart-plus-minus">
+                                                    <input class="cart-plus-minus-box" value="0" type="text">
+                                                    <div class="dec qtybutton">-</div>
+                                                    <div class="inc qtybutton">+</div>
+                                                    <div class="dec qtybutton"><i class="fa fa-minus"></i></div>
+                                                    <div class="inc qtybutton"><i class="fa fa-plus"></i></div>
+                                                </div>
+                                            </div>
+                                            <div class="add-to_btn">
+                                                <a class="btn product-cart button-icon flosun-button dark-btn" href="cart.html">Add to cart</a>
+                                                <a class="btn flosun-button secondary-btn rounded-0" href="wishlist.html">Add to wishlist</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Start -->
+    <a class="scroll-to-top" href="#">
+        <i class="lnr lnr-arrow-up"></i>
+    </a>
+    <!-- Scroll to Top End -->
+    @*<footer class="border-top footer text-muted">
+        <div class="container">
+        &copy; 2022 - Java_Floral - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+        </footer>*@
+    @*    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>*@
+    @RenderSection("Scripts", required: false)
+
+
+    <!-- JS
+    ============================================ -->
+    <!-- jQuery JS -->
+    <script src="~/assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <!-- jQuery Migrate JS -->
+    <script src="~/assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
+    <!-- Modernizer JS -->
+    <script src="~/assets/js/vendor/modernizr-3.7.1.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="~/assets/js/vendor/bootstrap.bundle.min.js"></script>
+
+    <!-- Swiper Slider JS -->
+    <script src="~/assets/js/plugins/swiper-bundle.min.js"></script>
+    <!-- nice select JS -->
+    <script src="~/assets/js/plugins/nice-select.min.js"></script>
+    <!-- Ajaxchimpt js -->
+    <script src="~/assets/js/plugins/jquery.ajaxchimp.min.js"></script>
+    <!-- Jquery Ui js -->
+    <script src="~/assets/js/plugins/jquery-ui.min.js"></script>
+    <!-- Jquery Countdown js -->
+    <script src="~/assets/js/plugins/jquery.countdown.min.js"></script>
+    <!-- jquery magnific popup js -->
+    <script src="~/assets/js/plugins/jquery.magnific-popup.min.js"></script>
+
+    <!-- Main JS -->
+    <script src="~/assets/js/main.js"></script>
+
+</body>
+</html>

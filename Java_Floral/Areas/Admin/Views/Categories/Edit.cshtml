@@ -1,0 +1,42 @@
+﻿@model Java_Floral.Models.Category
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="login-register-area mt-no-text">
+    <div class="container custom-area">
+        <div class="row">
+            <div class="col-lg-12 offset-lg-12 col-md-12 offset-md-12 col-custom">
+                <div class="login-register-wrapper">
+                    <div class="section-content text-center mb-5">
+                        <h2 class="title-4 mb-2">Edit</h2>
+                    </div>
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="id" />
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label"></label>
+                            <div single-input-item mb-3>
+
+                                <input asp-for="Name" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div single-input-item mb-3>
+
+                                <input type="submit" value="Save" class="btn flosun-button secondary-btn theme-color rounded-0" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

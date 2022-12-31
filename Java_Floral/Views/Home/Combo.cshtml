@@ -1,0 +1,209 @@
+﻿
+@model IEnumerable<Java_Floral.Models.Products>
+
+@{
+    ViewData["Title"] = "Combo";
+}
+
+
+<!-- Breadcrumb Area Start Here -->
+<div class="breadcrumbs-area position-relative">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="breadcrumb-content position-relative section-content">
+                    <h3 class="title-3">@ViewBag.category</h3>
+                    <ul>
+                        @*<li><a href="index.html">Home</a></li>*@
+                        <li>Combinations that offer great value for your money!<br /> Free delivery in Lahore, Karachi, Islamabad & Rawalpindi</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Area End Here -->
+<!-- Shop Main Area Start Here -->
+<div class="shop-main-area">
+    <div class="container container-default custom-area">
+        <div class="row flex-row-reverse">
+            <div class="col-12 col-custom widget-mt">
+                <!--shop toolbar start-->
+                <div class="shop_toolbar_wrapper mb-30">
+                    <div class="shop_toolbar_btn">
+                        <button data-role="grid_4" type="button" class="active btn-grid-4" title="Grid-4"><i class="fa fa-th"></i></button>
+                        <button data-role="grid_3" type="button" class="btn-grid-3" title="Grid-3"> <i class="fa fa-th-large"></i></button>
+                        <button data-role="grid_list" type="button" class="btn-list" title="List"><i class="fa fa-th-list"></i></button>
+                    </div>
+                    <div class="shop-select">
+                        <form class="d-flex flex-column w-100" action="#">
+                            <div class="form-group">
+                                <select class="form-control nice-select w-100">
+                                    <option selected value="1">Alphabetically, A-Z</option>
+                                    <option value="2">Sort by popularity</option>
+                                    <option value="3">Sort by newness</option>
+                                    <option value="4">Sort by price: low to high</option>
+                                    <option value="5">Sort by price: high to low</option>
+                                    <option value="6">Product Name: Z</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--shop toolbar end-->
+                <!-- Shop Wrapper Start -->
+                <div class="row shop_wrapper grid_4">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-3 col-md-6 col-sm-6  col-custom product-area">
+                            <div class="product-item">
+                                <div class="single-product position-relative mr-0 ml-0">
+                                    <div class="product-image">
+                                        <a class="d-block" asp-action="Details" asp-controller="Occasions" asp-route-id="@item.id">
+                                            <img src="~/@item.PImage" alt="" class="product-image-1 w-100" style="height:240px;">
+                                            <img src="~/assets/images/product/2.jpg" alt="" class="product-image-2 position-absolute w-100">
+                                        </a>
+                                        <span class="onsale">Sale!</span>
+                                        <div class="add-action d-flex flex-column position-absolute">
+                                            
+                                            <a href="#exampleModalCenter" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                                                <i class="lnr lnr-eye" data-toggle="tooltip" data-placement="left" title="Quick View"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="product-content">
+                                        <div class="product-title">
+                                            <h4 class="title-2"> <a href="product-details.html">@item.Ptitle</a></h4>
+                                        </div>
+                                        <div class="product-rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-o"></i>
+                                            <i class="fa fa-star-o"></i>
+                                        </div>
+                                        <div class="price-box">
+                                            <span class="regular-price ">@item.Price</span>
+                                            <span class="old-price"><del>$70.00</del></span>
+                                        </div>
+                                        <a asp-controller="Cart" asp-action="AddToCart"  asp-route-id="@item.id" class="btn product-cart">Add to Cart</a>
+                                    </div>
+                                    <div class="product-content-listview">
+                                        <div class="product-title">
+                                            <h4 class="title-2"> <a href="product-details.html">@item.Ptitle</a></h4>
+                                        </div>
+                                        <div class="product-rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-o"></i>
+                                            <i class="fa fa-star-o"></i>
+                                        </div>
+                                        <div class="price-box">
+                                            <span class="regular-price ">@item.Price</span>
+                                            <span class="old-price"><del>$70.00</del></span>
+                                        </div>
+                                        <p class="desc-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere metus vitae arcu imperdiet, id aliquet ante scelerisque. Sed sit amet sem vitae urna fringilla tempus.</p>
+                                        <div class="button-listview">
+                                            <a asp-controller="Cart" asp-action="AddToCart"  asp-route-id="@item.id" class="btn product-cart button-icon flosun-button dark-btn" data-toggle="tooltip" data-placement="top" title="Add to Cart"> <span>Add to Cart</span> </a>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+
+
+                <!-- Shop Wrapper End -->
+                <!-- Bottom Toolbar Start -->
+                <div class="row">
+                    <div class="col-sm-12 col-custom">
+                        <div class="toolbar-bottom">
+                            <div class="pagination">
+
+                                
+                                @{
+                                    var totalPage = ViewBag.totalPages;
+                                    var curentPage = ViewBag.cPage;
+
+
+                                    if (ViewBag.category == "All Products")
+                                    {
+                                    <ul>
+                                    
+                                        @if (curentPage == 0)
+                                        {
+
+                                            <li><a asp-route-currentPage="1" asp-action="Index" asp-controller="Home" class="page-link">Back</a></li>
+                                        }
+                                        else
+                                        {
+
+                                            <li><a asp-route-currentPage="@(curentPage-1)" asp-action="Index" asp-controller="Home" class="page-link">Back</a></li>
+                                        }
+
+                                        <li><a asp-route-currentPage="1" asp-action="Index" asp-controller="Home" class="page-link">First</a></li>
+                                        @for (var i = 1; i <= totalPage; i++)
+                                        {
+                                            if (curentPage == i)
+                                            {
+                                                <li><a class="page-link active"  asp-route-currentPage="@i" asp-action="Index" asp-controller="Home">@i</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a asp-route-currentPage="@i" asp-action="Index" asp-controller="Home" class="page-link">@i</a></li>
+                                            }
+                                        }
+                                        <li><a class="page-link" asp-route-currentPage="@totalPage" asp-action="Index" asp-controller="Home">Last</a></li>
+                                        @if (curentPage > totalPage)
+                                        {
+
+                                            <li><a class="page-link" asp-route-currentPage="@totalPage" asp-action="Index" asp-controller="Home">Next</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a class="page-link" asp-route-currentPage="@(curentPage+1)" asp-action="Index" asp-controller="Home">Next</a></li>
+
+                                        }
+                                    </ul>    
+                                    }
+                                }
+
+                              
+                            </div>
+                            <p class="desc-content text-center text-sm-right mb-0">Showing 1 - 12 of 34 result</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bottom Toolbar End -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Shop Main Area End Here -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*
+  <ul>
+                                    <li class="current">1</li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li class="next"><a href="#">next</a></li>
+                                    <li><a href="#">&gt;&gt;</a></li>
+                                </ul>*@

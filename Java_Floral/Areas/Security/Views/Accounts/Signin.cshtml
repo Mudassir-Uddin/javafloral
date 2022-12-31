@@ -1,0 +1,74 @@
+﻿@model Java_Floral.Models.LoginModel
+
+@{
+    ViewData["Title"] = "Signin";
+}
+
+
+<!-- Breadcrumb Area Start Here -->
+<div class="breadcrumbs-area position-relative">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="breadcrumb-content position-relative section-content">
+                    <h3 class="title-3">Login</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li>Login-Register</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Breadcrumb Area End Here -->
+<!-- Login Area Start Here -->
+<div class="login-register-area mt-no-text">
+    <div class="container custom-area">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-custom">
+                <div class="login-register-wrapper">
+                    <div class="section-content text-center mb-5">
+                        <h2 class="title-4 mb-2">Login</h2>
+                        <p class="desc-content">Please login using account detail bellow.</p>
+                    </div>
+                    <form asp-action="Signin">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label"></label>
+                            <div single-input-item mb-3>
+                                <input asp-for="Email" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" class="control-label"></label>
+                            <div single-input-item mb-3>
+                                <input asp-for="Password" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="RememberMe" class="control-label"></label>
+                            <div single-input-item mb-3>
+                                <input type="checkbox" asp-for="RememberMe" />
+                            </div>
+                            <span asp-validation-for="RememberMe" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div single-input-item mb-3>
+                                <input class="btn flosun-button secondary-btn theme-color rounded-0" type="submit" value="Login" />
+                            </div>
+                        </div>
+                    </form>
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Login Area End Here -->

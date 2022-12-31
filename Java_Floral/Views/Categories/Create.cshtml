@@ -1,0 +1,56 @@
+﻿@model Java_Floral.Models.Category
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@*<h1>Create</h1>
+
+    <h4>Category</h4>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>*@
+
+
+
+<!-- Login Area Start Here -->
+<div class="login-register-area mt-no-text">
+    <div class="container custom-area">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-custom">
+                <div class="login-register-wrapper">
+                    <div class="section-content text-center mb-5">
+                        <h2 class="title-4 mb-2">Add Category</h2>
+                    </div>
+                    <form asp-action="Create" >
+                        <div class="single-input-item mb-3">
+                            <input asp-for="Name" type="text" placeholder="Category Name">
+                        </div>
+                        <div class="single-input-item mb-3">
+                            <input type="submit" value="Add" class="btn flosun-button secondary-btn theme-color rounded-0" />
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Login Area End Here -->
+
+
+

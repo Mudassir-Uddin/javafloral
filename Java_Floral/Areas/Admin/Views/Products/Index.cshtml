@@ -1,0 +1,111 @@
+﻿@model ViewModelMultipleImages
+
+<!-- Single Tab Content Start -->
+<div class="tab-pane fade show active" id="dashboad" role="tabpanel">
+    <div class="myaccount-content">
+        <div class=" justify-content-left">
+            <nav class="main-nav">
+                <ul class="nav">
+                    <li>
+                        <a href="#">
+                            <span class="menu-text"> filter</span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-submenu dropdown-hover">
+                            @foreach (var item in @ViewBag.category)
+                            {
+                                <li><a asp-area="Admin" asp-controller="Products" asp-action="Index" asp-route-value="@item.Text">@item.Text</a></li>
+                            }
+                        </ul>
+                    </li>
+
+@*                    <li>
+                        <a asp-action="Create" asp-controller="Categories" asp-area="Admin">
+                            <span class="menu-text">Add Categories</span>
+                        </a>
+                    </li>*@
+
+                    <li>
+                        <a asp-action="Create" asp-controller="Products" asp-area="Admin">
+                            <span class="menu-text">Add Products <i class="fa fa-plus"></i></span>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+        @*<a class="btn flosun-button secondary-btn rounded-0" asp-controller="Accounts" asp-action="myaccount" asp-route-value="Mothers Day">Mother's Day</a>
+            <a class="btn flosun-button secondary-btn rounded-0" asp-controller="Accounts" asp-action="myaccount" asp-route-value="Combo">Combo</a>
+            <a class="btn flosun-button secondary-btn rounded-0" asp-controller="Accounts" asp-action="myaccount" asp-route-value="Love & Romance">Love & Romance</a>
+        *@
+
+        <table class="table table-bordered">
+            <thead class="table-success secondary-border">
+                <tr>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Category
+                    </th>
+                    @*<th>
+                        S_Discription
+                    </th>*@
+                    @*<th>
+                        L_Discription
+                    </th>*@
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        MainImage
+                    </th>
+                    @*<th>
+                        Multiple Images
+                    </th>*@
+                    <th>Button</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.product_List)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ptitle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PCategory.Name)
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.Pshortdis)
+                        </td>*@
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.Plongdis)
+                        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            <img src="~/@item.PImage" width="40px" style="border-radius:25%" />
+                        </td>
+                        @*<td>
+                            @foreach (var item1 in Model.multipeImagePro_List.Where(x => x.multi_img_id == item.id))
+                            {
+                                <img src="~/@item1.ImageUrl" style="width:40px;height:40px" />
+                            }
+                        </td>*@
+
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                            @*<a asp-action="Details" asp-route-id="@item.id">Details</a> |*@
+                            <a asp-action="Delete" asp-controller="Products" asp-route-id="@item.id" onclick="return confirm('Deleting !!');">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+<!-- Single Tab Content End -->
